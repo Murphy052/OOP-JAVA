@@ -1,6 +1,6 @@
-package core.settings;
+package Weather.core.settings;
 
-import core.base.Token;
+import Weather.core.base.Token;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

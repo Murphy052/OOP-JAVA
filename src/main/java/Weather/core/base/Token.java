@@ -1,4 +1,4 @@
-package core.base;
+package Weather.core.base;
 
 public abstract class Token {
     protected String token;
