@@ -1,10 +1,9 @@
-package ui;
+package Weather.ui;
 
-import ui.base.AbstractError;
+import Weather.ui.base.AbstractError;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class WrongToken extends AbstractError {
 

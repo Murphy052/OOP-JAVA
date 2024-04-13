@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import ui.WrongToken;
+import Weather.ui.WrongToken;
 
 
 public class WeatherApiKey extends Token {
