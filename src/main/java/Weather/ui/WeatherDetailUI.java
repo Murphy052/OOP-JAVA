@@ -22,12 +22,17 @@ public class WeatherDetailUI extends JFrame {
         JLabel backgroundLabel = new JLabel(icon);
         setContentPane(backgroundLabel);
 
-        JPanel panel = new JPanel(new GridLayout(4, 1, 10, 10));
+        JPanel panel = new JPanel(new BorderLayout());
         panel.setOpaque(false); // Make panel transparent
+
+        // Create a panel for weather details
+        JPanel weatherDetailsPanel = new JPanel(new GridLayout(3, 1));
+        weatherDetailsPanel.setOpaque(false); // Make panel transparent
 
         // Set foreground color for text labels
         Color textColor = new Color(255, 255, 255, 200); // White color with transparency
-        Font textFont = new Font("Arial", Font.BOLD, 14);
+        Font titleFont = new Font("Arial", Font.BOLD, 18);
+        Font textFont = new Font("Arial", Font.PLAIN, 14);
 
         JLabel temperatureLabel = new JLabel("Temperature: " + String.format("%.2f", wd.getCurrent().getTemp()) + "°C");
         temperatureLabel.setForeground(textColor);
@@ -41,6 +46,14 @@ public class WeatherDetailUI extends JFrame {
         descriptionLabel.setForeground(textColor);
         descriptionLabel.setFont(textFont);
 
+        weatherDetailsPanel.add(temperatureLabel);
+        weatherDetailsPanel.add(humidityLabel);
+        weatherDetailsPanel.add(descriptionLabel);
+
+        // Create a panel for the back button
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false); // Make panel transparent
+
         JButton backButton = new JButton("Back to Enter City");
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -50,15 +63,15 @@ public class WeatherDetailUI extends JFrame {
         });
         backButton.setForeground(textColor);
         backButton.setFont(textFont);
+//        buttonPanel.add(backButton);
 
-        panel.add(temperatureLabel);
-        panel.add(humidityLabel);
-        panel.add(descriptionLabel);
-//        panel.add(backButton);
+        // Add weather details panel and button panel to main panel
+        panel.add(weatherDetailsPanel, BorderLayout.CENTER);
+        panel.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Add panel to content pane
-        backgroundLabel.setLayout(new BorderLayout());
-        backgroundLabel.add(panel, BorderLayout.CENTER);
+        // Add main panel to content pane
+        backgroundLabel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+        backgroundLabel.add(panel);
 
         setVisible(true);
     }

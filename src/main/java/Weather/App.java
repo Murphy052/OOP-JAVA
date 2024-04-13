@@ -10,8 +10,7 @@ public class App {
         apiKey.setToken();
 
         WeatherDetail detail = WeatherDetail.get_weather_detail(apiKey.getToken());
-        System.out.println(detail.getCurrent().getTemp());
-        System.out.println(detail.getCurrent().getWeather().getFirst().getDescription());
+
         new WeatherDetailUI(detail);
     }
 }

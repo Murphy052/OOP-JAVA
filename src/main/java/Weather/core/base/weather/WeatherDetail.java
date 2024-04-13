@@ -1,5 +1,6 @@
 package Weather.core.base.weather;
 
+import Weather.location.Location;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,7 +18,9 @@ public class WeatherDetail {
     private CurrentWeather current;
 
     public static WeatherDetail get_weather_detail(String token) throws JsonProcessingException {
-        String requestUrl = "https://api.openweathermap.org/data/3.0/onecall?lat=40.409264&lon=49.867092&exclude=hourly,daily&appid=" + token;
+        Location location = new Location();
+
+        String requestUrl = "https://api.openweathermap.org/data/3.0/onecall?lat=" + location.getLatitude() + "&lon=" + location.getLongitude() + "&exclude=hourly,daily,minutely&appid=" + token;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(requestUrl))
