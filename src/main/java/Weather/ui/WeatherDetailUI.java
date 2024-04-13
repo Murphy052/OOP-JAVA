@@ -7,18 +7,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WeatherDetailUI extends JFrame{
+public class WeatherDetailUI extends JFrame {
 
     public WeatherDetailUI(WeatherDetail wd) {
 
-        setTitle(STR."Weather App - \{wd.getTimezone()}");
+        setTitle("Weather App - " + wd.getTimezone());
         setSize(400, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Set background image based on weather description
         String backgroundImage = getBackgroundImage(wd.getCurrent().getWeather().getFirst().getDescription());
-        setContentPane(new JLabel(new ImageIcon(backgroundImage)));
+        ImageIcon icon = new ImageIcon(backgroundImage);
+        JLabel backgroundLabel = new JLabel(icon);
+        setContentPane(backgroundLabel);
 
         JPanel panel = new JPanel(new GridLayout(4, 1, 10, 10));
         panel.setOpaque(false); // Make panel transparent
@@ -27,15 +29,15 @@ public class WeatherDetailUI extends JFrame{
         Color textColor = new Color(255, 255, 255, 200); // White color with transparency
         Font textFont = new Font("Arial", Font.BOLD, 14);
 
-        JLabel temperatureLabel = new JLabel(STR."Temperature: \{String.format("%.2f", wd.getCurrent().getTemp())}°C");
+        JLabel temperatureLabel = new JLabel("Temperature: " + String.format("%.2f", wd.getCurrent().getTemp()) + "°C");
         temperatureLabel.setForeground(textColor);
         temperatureLabel.setFont(textFont);
 
-        JLabel humidityLabel = new JLabel(STR."Humidity: \{wd.getCurrent().getHumidity()}%");
+        JLabel humidityLabel = new JLabel("Humidity: " + wd.getCurrent().getHumidity() + "%");
         humidityLabel.setForeground(textColor);
         humidityLabel.setFont(textFont);
 
-        JLabel descriptionLabel = new JLabel(STR."Description: \{wd.getCurrent().getWeather().getFirst().getDescription()}");
+        JLabel descriptionLabel = new JLabel("Description: " + wd.getCurrent().getWeather().getFirst().getDescription());
         descriptionLabel.setForeground(textColor);
         descriptionLabel.setFont(textFont);
 
@@ -43,7 +45,7 @@ public class WeatherDetailUI extends JFrame{
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Close the second page
-                new CityInput(); // Open the first page
+//                new CityInput(); // Open the first page
             }
         });
         backButton.setForeground(textColor);
@@ -52,10 +54,11 @@ public class WeatherDetailUI extends JFrame{
         panel.add(temperatureLabel);
         panel.add(humidityLabel);
         panel.add(descriptionLabel);
-        panel.add(backButton);
+//        panel.add(backButton);
 
         // Add panel to content pane
-        getContentPane().add(panel);
+        backgroundLabel.setLayout(new BorderLayout());
+        backgroundLabel.add(panel, BorderLayout.CENTER);
 
         setVisible(true);
     }
@@ -74,6 +77,4 @@ public class WeatherDetailUI extends JFrame{
             return "C:\\Users\\Zrac\\Downloads\\default.jpg"; // Default background image
         }
     }
-
-
 }
