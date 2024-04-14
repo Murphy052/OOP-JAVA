@@ -1,3 +1,10 @@
+/**
+ * This class represents daily weather information obtained from the OpenWeatherMap API.
+ * It includes attributes such as date, sunrise time, sunset time, moonrise time, moonset time,
+ * moon phase, summary, temperature, feels-like temperature, pressure, humidity, dew point,
+ * wind speed, wind direction, wind gust, weather conditions, cloudiness, probability of precipitation,
+ * amount of rain, and UV index.
+ */
 package Weather.weather;
 
 import java.time.LocalDateTime;
@@ -7,49 +14,79 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class Daily {
-    private long dt;
-    private long sunrise;
-    private long sunset;
-    private long moonrise;
-    private long moonset;
-    private double moon_phase;
-    private String summary;
-    private Temperature temp;
-    private Temperature feels_like;
-    private int pressure;
-    private int humidity;
-    private double dew_point;
-    private double wind_speed;
-    private int wind_deg;
-    private double wind_gust;
-    private Weather[] weather;
-    private int clouds;
-    private double pop;
-    private double rain;
-    private double uvi;
+    private long dt; // Date and time
+    private long sunrise; // Sunrise time
+    private long sunset; // Sunset time
+    private long moonrise; // Moonrise time
+    private long moonset; // Moonset time
+    private double moon_phase; // Moon phase
+    private String summary; // Summary of the daily weather
+    private Temperature temp; // Temperature information
+    private Temperature feels_like; // Feels-like temperature
+    private int pressure; // Atmospheric pressure
+    private int humidity; // Humidity percentage
+    private double dew_point; // Dew point temperature
+    private double wind_speed; // Wind speed
+    private int wind_deg; // Wind direction in degrees
+    private double wind_gust; // Wind gust speed
+    private Weather[] weather; // Weather conditions
+    private int clouds; // Cloudiness percentage
+    private double pop; // Probability of precipitation
+    private double rain; // Amount of rain
+    private double uvi; // UV index
 
     // Setters and getters
 
+    /**
+     * Retrieves the date and time of the daily weather forecast.
+     *
+     * @return Date and time in Unix timestamp format.
+     */
     public long getDt() {
         return dt;
     }
 
+    /**
+     * Sets the date and time of the daily weather forecast.
+     *
+     * @param dt Date and time in Unix timestamp format.
+     */
     public void setDt(long dt) {
         this.dt = dt;
     }
 
+    /**
+     * Retrieves the sunrise time.
+     *
+     * @return Sunrise time in Unix timestamp format.
+     */
     public long getSunrise() {
         return sunrise;
     }
 
+    /**
+     * Sets the sunrise time.
+     *
+     * @param sunrise Sunrise time in Unix timestamp format.
+     */
     public void setSunrise(long sunrise) {
         this.sunrise = sunrise;
     }
 
+    /**
+     * Retrieves the sunset time.
+     *
+     * @return Sunset time in Unix timestamp format.
+     */
     public long getSunset() {
         return sunset;
     }
 
+    /**
+     * Sets the sunset time.
+     *
+     * @param sunset Sunset time in Unix timestamp format.
+     */
     public void setSunset(long sunset) {
         this.sunset = sunset;
     }
@@ -249,11 +286,20 @@ public class Daily {
             this.morn = morn - 273.15;
         }
     }
-
+    /**
+     * Retrieves the maximum temperature of the day in Fahrenheit.
+     *
+     * @return Maximum temperature in Fahrenheit.
+     */
     public String getTemperatureF() {
         return String.format("%.0f", this.getTemp().getMax()) + "°";
     }
 
+    /**
+     * Retrieves the formatted description of the weather conditions.
+     *
+     * @return Formatted description of weather conditions.
+     */
     public String getDescriptionF() {
         String input = this.getWeather()[0].getDescription();
         return Arrays.stream(input.split("\\s+"))
@@ -261,11 +307,15 @@ public class Daily {
                 .collect(Collectors.joining(" "));
     }
 
+    /**
+     * Retrieves the formatted time of the daily forecast.
+     *
+     * @return Formatted time of the daily forecast.
+     */
     public String getTimeF() {
-        long unixTimeSeconds = this.getDt(); // Example Unix time in seconds
+        long unixTimeSeconds = this.getDt();
         LocalDateTime dateTime = LocalDateTime.ofEpochSecond(unixTimeSeconds, 0, ZoneOffset.UTC);
 
-        // Define a custom date-time formatter
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E d");
 
         return dateTime.format(formatter);

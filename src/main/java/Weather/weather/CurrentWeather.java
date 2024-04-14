@@ -2,22 +2,28 @@ package Weather.weather;
 
 import java.util.List;
 
+/**
+ * This class represents the current weather conditions obtained from the OpenWeatherMap API.
+ * It includes attributes such as date and time, sunrise time, sunset time, temperature, feels-like temperature,
+ * pressure, humidity, dew point, UV index, cloudiness, visibility, wind speed, wind direction, wind gust,
+ * and weather conditions.
+ */
 public class CurrentWeather {
-    private long dt;
-    private long sunrise;
-    private long sunset;
-    private double temp;
-    private double feels_like;
-    private int pressure;
-    private int humidity;
-    private double dew_point;
-    private double uvi;
-    private int clouds;
-    private int visibility;
-    private double wind_speed;
-    private int wind_deg;
-    private double wind_gust;
-    private List<Weather> weather;
+    private long dt; // Date and time
+    private long sunrise; // Sunrise time
+    private long sunset; // Sunset time
+    private double temp; // Temperature in Celsius
+    private double feels_like; // Feels-like temperature in Celsius
+    private int pressure; // Atmospheric pressure
+    private int humidity; // Humidity percentage
+    private double dew_point; // Dew point temperature in Celsius
+    private double uvi; // UV index
+    private int clouds; // Cloudiness percentage
+    private int visibility; // Visibility in meters
+    private double wind_speed; // Wind speed in meters per second
+    private int wind_deg; // Wind direction in degrees
+    private double wind_gust; // Wind gust speed in meters per second
+    private List<Weather> weather; // Weather conditions
 
     // Getter and setter for 'dt'
     public long getDt() {

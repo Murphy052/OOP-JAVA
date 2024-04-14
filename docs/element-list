@@ -1,0 +1,7 @@
+Weather
+Weather.core
+Weather.core.abstraction
+Weather.location
+Weather.ui
+Weather.ui.abstraction
+Weather.weather

@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"Weather"},{"l":"Weather.core"},{"l":"Weather.core.abstraction"},{"l":"Weather.location"},{"l":"Weather.ui"},{"l":"Weather.ui.abstraction"},{"l":"Weather.weather"}];updateSearchResults();

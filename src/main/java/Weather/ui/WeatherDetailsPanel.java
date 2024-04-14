@@ -8,7 +8,19 @@ import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ListIterator;
 
+/**
+ * This class is responsible for creating a weather details panel that displays information about the current weather and daily forecast.
+ * It utilizes a `Colors` object to define the text color based on the current theme.
+ */
 public class WeatherDetailsPanel {
+
+    /**
+     * Creates a weather details panel with information about the current weather and daily forecast.
+     *
+     * @param wd The `WeatherDetail` object containing current weather data and daily forecast. (required)
+     * @param colors The `Colors` object defining the text color for the panel elements. (required)
+     * @return A `JPanel` representing the weather details panel.
+     */
     public static JPanel createPanel(WeatherDetail wd, Colors colors) {
         JPanel weatherDetailsPanel = new JPanel(new BorderLayout());
         weatherDetailsPanel.setOpaque(false);
@@ -24,6 +36,13 @@ public class WeatherDetailsPanel {
         return weatherDetailsPanel;
     }
 
+    /**
+     * Creates a sub-panel displaying the location (timezone), current temperature, and weather description.
+     *
+     * @param wd The `WeatherDetail` object containing current weather data. (required)
+     * @param colors The `Colors` object defining the text color for the panel elements. (required)
+     * @return A `JPanel` representing the main details panel.
+     */
     private static JPanel createMainDetailsPanel(WeatherDetail wd, Colors colors) {
         JPanel mainDetailsPanel = new JPanel(new GridLayout(3, 1));
         mainDetailsPanel.setOpaque(false);
@@ -53,6 +72,13 @@ public class WeatherDetailsPanel {
         return mainDetailsPanel;
     }
 
+    /**
+     * Creates a sub-panel displaying additional weather details like humidity, wind speed, etc.
+     *
+     * @param wd The `WeatherDetail` object containing current weather data. (required)
+     * @param colors The `Colors` object defining the text color for the panel elements. (required)
+     * @return A `JPanel` representing the extra details panel.
+     */
     private static JPanel createExtraDetailsPanel(WeatherDetail wd, Colors colors) {
         JPanel extraDetailsPanel = new JPanel(new GridLayout(2, wd.getExtraDetailsF().size() / 2));
         extraDetailsPanel.setOpaque(false);
@@ -73,6 +99,14 @@ public class WeatherDetailsPanel {
         return extraDetailsPanel;
     }
 
+    /**
+    * Creates a sub-panel displaying the daily forecast for the next few days.
+    *
+    * @param wd The `WeatherDetail` object containing daily forecast data. (required)
+    * @param colors The `Colors` object defining the text
+    * @param colors The `Colors` object defining the text color for the panel elements. (required)
+    * @return A `JPanel` representing the daily forecast panel.
+    */
     private static JPanel createDailyPanel(WeatherDetail wd, Colors colors) {
         JPanel dailyPanel = new JPanel(new GridLayout(1, wd.getDaily().size()));
         dailyPanel.setOpaque(false);
@@ -89,6 +123,13 @@ public class WeatherDetailsPanel {
         return dailyPanel;
     }
 
+    /**
+     * Creates a sub-panel for each day in the daily forecast, displaying the date, temperature, and weather description.
+     *
+     * @param daily The `Daily` object containing forecast data for a single day. (required)
+     * @param colors The `Colors` object defining the text color for the panel elements. (required)
+     * @return A `JPanel` representing a single day's forecast details.
+     */
     private static JPanel createDailyDetailsPanel(Daily daily, Colors colors) {
         JPanel panel = new JPanel(new BorderLayout()) {
             @Override

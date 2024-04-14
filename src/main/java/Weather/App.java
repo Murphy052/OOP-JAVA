@@ -1,7 +1,7 @@
 package Weather;
 
 import Weather.weather.WeatherDetail;
-import Weather.core.settings.WeatherApiKey;
+import Weather.core.WeatherApiKey;
 import Weather.ui.AppUI;
 
 public class App {
