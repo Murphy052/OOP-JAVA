@@ -10,6 +10,10 @@ import Weather.ui.WrongToken;
 
 
 public class WeatherApiKey extends Token {
+    public WeatherApiKey() {
+        this.setToken();
+    }
+
     private void setTokenFromEnv() throws Exception{
         Path path = Paths.get(".token");
         this.token = Files.readString(path);

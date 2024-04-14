@@ -9,6 +9,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WeatherDetail {
     private double lat;
@@ -17,10 +19,12 @@ public class WeatherDetail {
     private int timezone_offset;
     private CurrentWeather current;
 
+    final private static String APIUrl = "https://api.openweathermap.org/data/3.0/onecall";
+
     public static WeatherDetail get_weather_detail(String token) throws JsonProcessingException {
         Location location = new Location();
 
-        String requestUrl = "https://api.openweathermap.org/data/3.0/onecall?lat=" + location.getLatitude() + "&lon=" + location.getLongitude() + "&exclude=hourly,daily,minutely&appid=" + token;
+        String requestUrl = APIUrl + "?lat=" + location.getLatitude() + "&lon=" + location.getLongitude() + "&exclude=hourly,daily,minutely&appid=" + token;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(requestUrl))
@@ -86,5 +90,29 @@ public class WeatherDetail {
 
     public void setCurrent(CurrentWeather current) {
         this.current = current;
+    }
+
+    public String getTemperatureF() {
+        return String.format("%.2f", this.getCurrent().getTemp()) + "°C";
+    }
+
+    public String getDescription() {
+        return this.getCurrent().getWeather().getFirst().getDescription();
+    }
+
+    public String getDescriptionF() {
+        return this.getCurrent().getWeather().getFirst().getDescription();
+    }
+
+    public List<String> getExtraDetailsF() {
+        List<String> ed = new ArrayList<String>();
+        ed.add("Feels Like  " + String.format("%.2f", this.getCurrent().getFeels_like()) + "°C");
+        ed.add("Wind  " + this.getCurrent().getWind_speed());
+        ed.add("Visibility  " + this.getCurrent().getVisibility());
+        ed.add("Pressure  " + this.getCurrent().getPressure());
+        ed.add("Humidity  " + this.getCurrent().getHumidity() + "%");
+        ed.add("Dew Point  " + String.format("%.2f", this.getCurrent().getDew_point()) + "°C");
+
+        return ed;
     }
 }

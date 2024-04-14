@@ -61,7 +61,7 @@ public class CurrentWeather {
     }
 
     public void setFeels_like(double feels_like) {
-        this.feels_like = feels_like;
+        this.feels_like = feels_like - 273.15;
     }
 
     // Getter and setter for 'pressure'
@@ -88,7 +88,7 @@ public class CurrentWeather {
     }
 
     public void setDew_point(double dew_point) {
-        this.dew_point = dew_point;
+        this.dew_point = dew_point - 273.15;
     }
 
     // Getter and setter for 'uvi'
