@@ -6,9 +6,6 @@ import Weather.weather.WeatherDetail;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
-import java.awt.image.BufferedImage;
-import java.awt.image.ConvolveOp;
-import java.awt.image.Kernel;
 import java.util.ListIterator;
 
 public class WeatherDetailsPanel {
@@ -100,11 +97,11 @@ public class WeatherDetailsPanel {
                 Graphics2D g2d = (Graphics2D) g.create();
                 int width = getWidth();
                 int height = getHeight();
-                float opacity = 0.5f; // Adjust the opacity as needed
-                Color bgColor = new Color(255, 255, 255, (int) (255 * opacity)); // Translucent white color
+                float opacity = 0.4f;
+                Color bgColor = new Color(255, 255, 255, (int) (255 * opacity));
                 g2d.setPaint(bgColor);
                 // Increase the height of the translucent rectangle
-                g2d.fill(new RoundRectangle2D.Double(0, 0, width - 8, height, 10, 10)); // Rounded rectangle for border
+                g2d.fill(new RoundRectangle2D.Double(0, 0, width - 8, height, 10, 10));
                 g2d.dispose();
             }
         };
@@ -131,7 +128,6 @@ public class WeatherDetailsPanel {
         panel.add(temperatureLabel, BorderLayout.CENTER);
         panel.add(descriptionLabel, BorderLayout.SOUTH);
 
-        // Apply the background blur and rounded corners to the panel
         panel.setOpaque(false);
 
         return panel;

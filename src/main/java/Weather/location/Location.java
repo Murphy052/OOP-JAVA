@@ -6,7 +6,6 @@ import com.maxmind.geoip2.model.CityResponse;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.InetAddress;
 import java.net.URL;
 
@@ -29,8 +28,6 @@ public class Location {
 
             InetAddress ipAddress = InetAddress.getByName(this.ip);
             CityResponse response = dbReader.city(ipAddress);
-
-            System.out.println(response.getLocation());
 
             this.latitude = response.getLocation().getLatitude();
             this.longitude = response.getLocation().getLongitude();

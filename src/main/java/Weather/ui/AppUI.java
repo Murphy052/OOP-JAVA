@@ -1,6 +1,7 @@
 package Weather.ui;
 
 import Weather.weather.WeatherDetail;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,10 +14,11 @@ public class AppUI extends JFrame {
     private WeatherDetail wd;
     private JPanel weatherDetailsPanel;
     private Colors colors;
+    private String token;
 
-    public AppUI(WeatherDetail wd) {
+    public AppUI(WeatherDetail wd, String token) {
         this.wd = wd;
-
+        this.token = token;
         this.colors = new Colors(!this.wd.isDaytime(), this.wd.getDescription());
 
         this.initFrame();
@@ -24,7 +26,6 @@ public class AppUI extends JFrame {
 
     private void initFrame() {
         setTitle("Weather App");
-//        setSize(800, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -50,28 +51,44 @@ public class AppUI extends JFrame {
         };
         setContentPane(panel);
 
-        JPanel weatherDetailsPanel = WeatherDetailsPanel.createPanel(this.wd, this.colors);
+        this.weatherDetailsPanel = WeatherDetailsPanel.createPanel(this.wd, this.colors);
         JButton refreshButton = RefreshButton.createButton();
-
         refreshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                updateWeatherDetail();
                 // Repaint the frame to reflect the changes
                 revalidate();
                 repaint();
             }
         });
 
-//        panel.add(this.getSearch(), BorderLayout.NORTH);
-        panel.add(weatherDetailsPanel, BorderLayout.CENTER);
-//        panel.add(refreshButton, BorderLayout.EAST);
+        JPanel search = this.createSearch();
+
+        panel.add(search, BorderLayout.NORTH);
+        panel.add(refreshButton, BorderLayout.EAST);
+        panel.add(this.weatherDetailsPanel, BorderLayout.CENTER);
 
         pack();
         setVisible(true);
     }
 
-    private JPanel getSearch() {
+    private void updateWeatherDetail() {
+        try {
+            this.wd = WeatherDetail.get_weather_detail(this.token);
+        } catch (JsonProcessingException e) {
+            System.exit(-1);
+        }
+        this.colors = new Colors(!this.wd.isDaytime(), this.wd.getDescription());
+        getContentPane().remove(this.weatherDetailsPanel);
+        JPanel weatherDetailsPanel = WeatherDetailsPanel.createPanel(this.wd, this.colors);
+
+        getContentPane().add(weatherDetailsPanel);
+    }
+
+    private JPanel createSearch() {
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        searchPanel.setOpaque(false);
 
         JTextField searchField = new JTextField();
         searchField.setPreferredSize(new Dimension(200, 30));
@@ -85,9 +102,8 @@ public class AppUI extends JFrame {
 
 
         // Create a search icon
-        ImageIcon searchIcon = new ImageIcon("src/main/java/Weather/static/search.png");
-        System.out.println("Icon loaded: " + searchIcon.getImageLoadStatus());
-        JButton searchButton = new JButton(searchIcon);
+        Image img = new ImageIcon("src/main/java/Weather/static/search.png").getImage().getScaledInstance(28, 28, Image.SCALE_SMOOTH);
+        JButton searchButton = new JButton(new ImageIcon(img));
         searchButton.setPreferredSize(new Dimension(30, 30));
         searchButton.setContentAreaFilled(false); // Make the button transparent
         searchButton.setBorderPainted(false); // Remove border

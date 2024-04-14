@@ -10,6 +10,6 @@ public class App {
 
         WeatherDetail detail = WeatherDetail.get_weather_detail(apiKey.getToken());
 
-        new AppUI(detail);
+        new AppUI(detail, apiKey.getToken());
     }
 }
