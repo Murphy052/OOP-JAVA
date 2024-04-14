@@ -1,8 +1,8 @@
 package Weather;
 
-import Weather.core.base.weather.WeatherDetail;
+import Weather.weather.WeatherDetail;
 import Weather.core.settings.WeatherApiKey;
-import Weather.ui.WeatherDetailUI;
+import Weather.ui.AppUI;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -10,6 +10,6 @@ public class App {
 
         WeatherDetail detail = WeatherDetail.get_weather_detail(apiKey.getToken());
 
-        new WeatherDetailUI(detail);
+        new AppUI(detail);
     }
 }

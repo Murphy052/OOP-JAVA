@@ -1,4 +1,4 @@
-package Weather.core.base.weather;
+package Weather.weather;
 
 import java.util.List;
 

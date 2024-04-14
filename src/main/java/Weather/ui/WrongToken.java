@@ -1,6 +1,6 @@
 package Weather.ui;
 
-import Weather.ui.base.AbstractError;
+import Weather.ui.abstraction.AbstractError;
 
 import javax.swing.*;
 import java.awt.*;

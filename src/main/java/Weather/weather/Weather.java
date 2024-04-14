@@ -1,4 +1,4 @@
-package Weather.core.base.weather;
+package Weather.weather;
 
 public class Weather {
     private int id;

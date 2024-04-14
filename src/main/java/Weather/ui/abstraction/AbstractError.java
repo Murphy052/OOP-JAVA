@@ -1,4 +1,4 @@
-package Weather.ui.base;
+package Weather.ui.abstraction;
 
 import javax.swing.*;
 
